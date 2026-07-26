@@ -1,0 +1,28 @@
+Acme Corp — Human Resources Policy (v2024.1)
+Classification: Internal
+Audience: All employees
+
+1. Purpose
+This document summarizes employee leave, remote work, and conduct expectations
+for Acme Corp. It is a fictional sample for security training and demos.
+
+2. Paid time off (PTO)
+- Full-time employees accrue 20 days of vacation per calendar year.
+- Sick leave: 10 days per year (unused sick leave does not roll over).
+- Parental leave: 12 weeks primary caregiver; 4 weeks secondary caregiver.
+- Requests should be submitted in the HR portal at least 5 business days in advance
+  for planned vacation of more than 2 consecutive days.
+
+3. Remote work
+- Hybrid default: 3 days in office, 2 days remote per week unless role is remote-only.
+- Managers may approve temporary full-remote for up to 30 days.
+- Core collaboration hours: 10:00–16:00 local time.
+
+4. Code of conduct
+- Treat colleagues with respect; harassment is prohibited.
+- Do not share confidential employee records outside authorized systems.
+- Report policy questions to hr@acme.example (fictional).
+
+5. Onboarding
+New hires complete security awareness training within 14 days of start date.
+Manager checklist includes laptop assignment, badge access, and benefits enrollment.

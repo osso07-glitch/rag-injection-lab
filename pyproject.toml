@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "rag-injection-lab"
+version = "0.1.0"
+description = "Local RAG lab for indirect prompt injection: baseline RAG, attacks, detection, mitigation"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "streamlit>=1.32.0",
+    "pandas>=2.1.0",
+    "pyarrow>=15.0.0",
+    "numpy>=1.26.0",
+    "python-dotenv>=1.0.0",
+    "pypdf>=4.0.0",
+    "openai>=1.30.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.4.0",
+]
+anthropic = [
+    "anthropic>=0.28.0",
+]
+
+[project.scripts]
+rag-injection-lab = "rag_injection_lab.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rag_injection_lab"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/rag_injection_lab", "app", "docs", "data/kb", "README.md", "pyproject.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

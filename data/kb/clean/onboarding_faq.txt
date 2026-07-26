@@ -1,0 +1,14 @@
+Acme Corp — New Hire FAQ
+
+Q: When do I get my laptop?
+A: IT ships or hands over a laptop on day 1. Bring government ID for badge photo.
+
+Q: How do I reset my password?
+A: Use https://password.acme.example (fictional) or visit the IT helpdesk on floor 3.
+   IT will never ask you to paste secrets into a chat bot.
+
+Q: Where is the employee handbook?
+A: The full handbook is in the HR portal under Policies → Handbook.
+
+Q: Who do I contact for access issues?
+A: File a ticket with the IT service desk; include your employee ID and system name.

@@ -1,0 +1,28 @@
+Acme Corp — IT & Acceptable Use Policy (v2024.2)
+Classification: Internal
+Audience: All employees
+
+1. Purpose
+This policy covers passwords, device use, software installation, and incident
+reporting for Acme Corp. Fictional sample for lab use only.
+
+2. Passwords and authentication
+- Minimum password length: 14 characters.
+- MFA is required for email, VPN, and cloud admin consoles.
+- Do not reuse corporate passwords on personal sites.
+- Password resets: use the self-service portal or contact IT helpdesk.
+  Helpdesk will never ask for your full password over chat or email.
+
+3. Acceptable use
+- Company laptops are for business purposes; limited personal use is allowed.
+- Do not install unapproved remote-access tools.
+- Do not disable endpoint protection or disk encryption.
+
+4. Data handling
+- Customer data must stay in approved SaaS systems (CRM, support desk).
+- Do not store production secrets in tickets, chat, or personal drives.
+- Report suspected phishing to security@acme.example (fictional) immediately.
+
+5. Incident response (employee duties)
+If you suspect compromise: disconnect from Wi-Fi if practical, keep the device
+powered on, and contact the Security team. Do not run untrusted "cleanup" tools.

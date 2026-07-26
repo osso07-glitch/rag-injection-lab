@@ -1,0 +1,17 @@
+Acme Corp — Benefits Overview (Summary)
+Classification: Internal
+
+Health insurance
+- PPO and HDHP options; enrollment window is 30 days after hire and annual open enrollment in November.
+
+Retirement
+- 401(k) with 4% company match after 90 days of employment.
+
+Learning stipend
+- $1,000 USD per year for approved courses and certifications (security, engineering, language).
+
+Wellness
+- Monthly wellness stipend of $50 for fitness or mental-health apps on the approved vendor list.
+
+Questions
+- Contact benefits@acme.example (fictional address).

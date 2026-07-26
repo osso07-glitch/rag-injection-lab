@@ -1,0 +1,18 @@
+services:
+  rag-injection-lab:
+    build: .
+    ports:
+      # Localhost only on the host — safer default for a no-auth app
+      - "127.0.0.1:8505:8505"
+    volumes:
+      - ./data:/app/data
+      - ./meta:/app/meta
+    environment:
+      RAG_LAB_DATA_DIR: /app/data
+      RAG_LAB_META_DIR: /app/meta
+      RAG_LAB_HOST: 0.0.0.0
+      RAG_LAB_PORT: "8505"
+      # Pass through if present on the host (optional)
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    restart: unless-stopped

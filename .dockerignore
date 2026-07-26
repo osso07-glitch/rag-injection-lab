@@ -1,0 +1,15 @@
+.venv
+venv
+.git
+.pytest_cache
+.ruff_cache
+__pycache__
+*.pyc
+*.egg-info
+dist
+build
+.DS_Store
+data/corpora/**
+data/findings/**
+data/_uploads/**
+meta/*.db
