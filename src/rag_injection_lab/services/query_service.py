@@ -9,6 +9,9 @@ from typing import Any
 
 from rag_injection_lab.config import (
     CHAT_MODEL,
+    DEFAULT_MITIGATION,
+    ENABLE_DETECTION,
+    ENABLE_MITIGATION,
     FINDINGS_DIR,
     PROVIDER,
     TOP_K,
@@ -38,16 +41,39 @@ def ask(
     top_k: int | None = None,
     provider: str | None = None,
     chat_model: str | None = None,
-    run_detection: bool = True,
-    mitigation: MitigationMode | str = MitigationMode.NONE,
+    run_detection: bool | None = None,
+    mitigation: MitigationMode | str | None = None,
     persist: bool = True,
 ) -> QueryLog:
-    """End-to-end RAG query against an existing corpus."""
+    """End-to-end RAG query against an existing corpus.
+
+    Defaults for detection/mitigation come from env flags when arguments are
+    omitted (``None``):
+
+    - ``RAG_LAB_ENABLE_DETECTION`` (default true)
+    - ``RAG_LAB_ENABLE_MITIGATION`` + ``RAG_LAB_DEFAULT_MITIGATION`` (default off)
+    """
     ensure_runtime_dirs()
     t0 = time.perf_counter()
     qid = make_query_id()
     prov = (provider or PROVIDER).lower()
     k = top_k if top_k is not None else TOP_K
+    do_detect = ENABLE_DETECTION if run_detection is None else bool(run_detection)
+
+    if mitigation is None:
+        if ENABLE_MITIGATION:
+            try:
+                mit_mode = MitigationMode(DEFAULT_MITIGATION)
+            except ValueError:
+                mit_mode = MitigationMode.SANITIZE
+        else:
+            mit_mode = MitigationMode.NONE
+    else:
+        mit_mode = (
+            mitigation
+            if isinstance(mitigation, MitigationMode)
+            else MitigationMode(str(mitigation))
+        )
 
     meta = load_corpus_meta(corpus_id)
     chunks = load_chunks(corpus_id)
@@ -76,8 +102,8 @@ def ask(
 
     for i, score in zip(idx.tolist(), scores.tolist(), strict=True):
         c = chunks[i]
-        hits = scan_text(c.text) if run_detection else []
-        verdict = verdict_from_hits(hits) if run_detection else Verdict.UNKNOWN.value
+        hits = scan_text(c.text) if do_detect else []
+        verdict = verdict_from_hits(hits) if do_detect else Verdict.UNKNOWN.value
         rc = RetrievedChunk(
             chunk_id=c.chunk_id,
             doc_id=c.doc_id,
@@ -96,13 +122,7 @@ def ask(
     overall = (
         Verdict.SUSPICIOUS.value
         if any(r.verdict == Verdict.SUSPICIOUS.value for r in retrieved)
-        else (Verdict.CLEAN.value if run_detection else Verdict.UNKNOWN.value)
-    )
-
-    mit_mode = (
-        mitigation
-        if isinstance(mitigation, MitigationMode)
-        else MitigationMode(str(mitigation))
+        else (Verdict.CLEAN.value if do_detect else Verdict.UNKNOWN.value)
     )
     prompt_chunks = apply_mitigation(retrieved, mit_mode)
     messages = build_messages(question, prompt_chunks, mitigation=mit_mode)

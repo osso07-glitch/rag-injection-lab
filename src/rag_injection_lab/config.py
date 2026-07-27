@@ -45,9 +45,12 @@ TOP_K = int(os.environ.get("RAG_LAB_TOP_K", "4"))
 CHUNK_SIZE = int(os.environ.get("RAG_LAB_CHUNK_SIZE", "800"))
 CHUNK_OVERLAP = int(os.environ.get("RAG_LAB_CHUNK_OVERLAP", "120"))
 
-# Feature flags (phases)
-ENABLE_DETECTION = os.environ.get("RAG_LAB_ENABLE_DETECTION", "0") == "1"
+# Feature flags — wired into ask() as defaults when callers omit overrides.
+# Detection defaults ON (lab demos need scan_text); mitigation defaults OFF.
+ENABLE_DETECTION = os.environ.get("RAG_LAB_ENABLE_DETECTION", "1") == "1"
 ENABLE_MITIGATION = os.environ.get("RAG_LAB_ENABLE_MITIGATION", "0") == "1"
+# When ENABLE_MITIGATION is true and ask() has no explicit mitigation, use this mode.
+DEFAULT_MITIGATION = os.environ.get("RAG_LAB_DEFAULT_MITIGATION", "sanitize").strip().lower()
 
 
 def ensure_runtime_dirs() -> None:
